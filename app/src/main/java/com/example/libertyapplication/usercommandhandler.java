@@ -13,8 +13,8 @@ import java.io.Serializable;
  *
  * @author akint
  */
-
-public class usercommandhandler implements Runnable, Serializable {
+@Parcel
+public class usercommandhandler implements Runnable {
     frameworkclientInterface myUI;
     client myClient;
     String therCommand = "";

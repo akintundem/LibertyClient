@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity implements frameworkclientIn
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,createAccount.class);
-                intent.putExtra("myUsercommandhandler",myUsercommandhandler);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("myUsercommandhandler",Parcels.wrap(myUsercommandhandler));
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
