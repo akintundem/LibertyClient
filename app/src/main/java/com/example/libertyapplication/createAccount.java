@@ -10,22 +10,21 @@ import android.widget.EditText;
 
 import org.parceler.Parcels;
 
-public class createAccount extends AppCompatActivity {
+public class createAccount extends AppCompatActivity implements frameworkclientInterface{
     usercommandhandler myUsercommandhandler;
-
-    public createAccount(usercommandhandler myUsercommandhandler){
-        this.myUsercommandhandler = myUsercommandhandler;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         Button create = findViewById(R.id.createButton1);
+        client myClient = new client((int)7777, (String)"10.0.2.2", this);
+        myUsercommandhandler = new usercommandhandler(this,myClient);
         myUsercommandhandler = Parcels.unwrap(getIntent().getParcelableExtra("user"));
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myUsercommandhandler.handleUserCommand("2");
                 EditText firstname = findViewById(R.id.firstnameBase);
                 EditText middlename = findViewById(R.id.middleNameBase);
                 EditText lastname = findViewById(R.id.lastNameBase);
@@ -44,15 +43,17 @@ public class createAccount extends AppCompatActivity {
                         "/"+password.getText().toString()+
                         "/"+confirmpassword.getText().toString()+
                         "/"+username.getText().toString();
-                System.out.println(userDetails);
-                if(getIntent().getExtras() != null) {
-                    myUsercommandhandler = (usercommandhandler) getIntent().getSerializableExtra("myUsercommandhandler");
-                }
                 myUsercommandhandler.handleUserCommand("4"+"/"+"newuser"+"/"+userDetails);
+                myUsercommandhandler.handleUserCommand("3");
                 Intent intent = new Intent(createAccount.this,MainActivity.class);
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public void update(String theMessage) {
 
     }
 }

@@ -23,15 +23,17 @@ public class MainActivity extends AppCompatActivity implements frameworkclientIn
         Button create = findViewById(R.id.createButton);
         client myClient = new client((int)7777, (String)"10.0.2.2", this);
         myUsercommandhandler = new usercommandhandler(this,myClient);
-        myUsercommandhandler.handleUserCommand("2");
         Button login = findViewById(R.id.loginButton);
+
+        if(getIntent().getExtras() != null) {
+            String user =(String) getIntent().getSerializableExtra("user");
+            System.out.println(user.toString());
+        }
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,createAccount.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("myUsercommandhandler",Parcels.wrap(myUsercommandhandler));
-                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -39,11 +41,16 @@ public class MainActivity extends AppCompatActivity implements frameworkclientIn
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myUsercommandhandler.handleUserCommand("2");
                 EditText username = findViewById(R.id.userName);
                 EditText password = findViewById(R.id.password);
                 String userDetails = username.getText().toString()+"/"+password.getText().toString();
                 System.out.println(userDetails);
                 myUsercommandhandler.handleUserCommand("4"+"/"+"viewuser"+"/"+userDetails);
+                // return value that you will use to create a new user class/object
+                // Pass that class through Intent.putExtra into the Login Page so That we can view
+                // the User Profile
+                myUsercommandhandler.handleUserCommand("3");
                 Intent intent = new Intent(MainActivity.this,LoginPage.class);
                 startActivity(intent);
             }
