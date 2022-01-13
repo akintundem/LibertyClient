@@ -2,17 +2,29 @@ package com.example.libertyapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.parceler.Parcels;
-
+@SuppressLint("HandlerLeak")
 public class createAccount extends AppCompatActivity implements frameworkclientInterface{
     usercommandhandler myUsercommandhandler;
+    TextView myMessageWindow;
+    String userData;
 
+    @Override
+    public void update(String theMessage) {
+        Message msg = Message.obtain();
+        msg.obj = theMessage;
+        handler.sendMessage(msg);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +56,6 @@ public class createAccount extends AppCompatActivity implements frameworkclientI
                         "/"+confirmpassword.getText().toString()+
                         "/"+username.getText().toString();
                 myUsercommandhandler.handleUserCommand("4"+"/"+"newuser"+"/"+userDetails);
-                myUsercommandhandler.handleUserCommand("3");
                 Intent intent = new Intent(createAccount.this,MainActivity.class);
                 startActivity(intent);
             }
@@ -52,8 +63,10 @@ public class createAccount extends AppCompatActivity implements frameworkclientI
 
     }
 
-    @Override
-    public void update(String theMessage) {
-
-    }
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            myMessageWindow.append("\n" + msg.obj.toString());
+        }
+    };
 }
