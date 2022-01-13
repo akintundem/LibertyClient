@@ -16,6 +16,16 @@ public class LoginPage extends AppCompatActivity {
         Button transfer = findViewById(R.id.transferButton);
         Button save = findViewById(R.id.saveButton);
         Button back = findViewById(R.id.backButton);
+        String ma = getIntent().getStringExtra("output");
+        System.out.println("Here we are with "+ ma.toString());
+
+
+
+
+
+
+
+
         transfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
