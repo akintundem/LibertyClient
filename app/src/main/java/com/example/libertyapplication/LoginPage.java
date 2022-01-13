@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-public class LoginPage extends AppCompatActivity {
-
+public class LoginPage extends AppCompatActivity implements frameworkclientInterface{
+    usercommandhandler myUsercommandhandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,15 +17,17 @@ public class LoginPage extends AppCompatActivity {
         Button transfer = findViewById(R.id.transferButton);
         Button save = findViewById(R.id.saveButton);
         Button back = findViewById(R.id.backButton);
+        EditText currentCash = findViewById(R.id.currentCash);
+
+        client myClient = new client((int)7777, (String)"10.0.2.2", this);
+        myUsercommandhandler = new usercommandhandler(this,myClient);
+
+        myUsercommandhandler.handleUserCommand("2");
+
+
         String ma = getIntent().getStringExtra("output");
-        System.out.println("Here we are with "+ ma.toString());
-
-
-
-
-
-
-
+        currentCash.append(ma);
+        System.out.println("Here we are with "+ ma);
 
         transfer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,5 +50,10 @@ public class LoginPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void update(String theMessage) {
+
     }
 }

@@ -58,7 +58,7 @@ public class MainActivity  extends AppCompatActivity implements frameworkclientI
                     Intent intent = new Intent(MainActivity.this,LoginPage.class);
                     System.out.println(output);
                     intent.putExtra("output",output);
-                    myUsercommandhandler.handleUserCommand("3");
+                    //myUsercommandhandler.handleUserCommand("3");
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "Error getting user. Please try again", Toast.LENGTH_SHORT).show();
