@@ -32,7 +32,9 @@ public class createAccount extends AppCompatActivity implements frameworkclientI
         Button create = findViewById(R.id.createButton1);
         client myClient = new client((int)7777, (String)"10.0.2.2", this);
         myUsercommandhandler = new usercommandhandler(this,myClient);
-        myUsercommandhandler = Parcels.unwrap(getIntent().getParcelableExtra("user"));
+
+        myUsercommandhandler.handleUserCommand("2");
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +58,17 @@ public class createAccount extends AppCompatActivity implements frameworkclientI
                         "/"+confirmpassword.getText().toString()+
                         "/"+username.getText().toString();
                 myUsercommandhandler.handleUserCommand("4"+"/"+"newuser"+"/"+userDetails);
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 Intent intent = new Intent(createAccount.this,MainActivity.class);
                 startActivity(intent);
+
+                myUsercommandhandler.handleUserCommand("3");
             }
         });
 

@@ -36,7 +36,7 @@ public class MainActivity  extends AppCompatActivity implements frameworkclientI
                 Intent intent = new Intent(MainActivity.this,createAccount.class);
                 startActivity(intent);
             }
-        });
+        }); // Just send to create page
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,6 @@ public class MainActivity  extends AppCompatActivity implements frameworkclientI
                 EditText username = findViewById(R.id.userName);
                 EditText password = findViewById(R.id.password);
                 String userDetails = username.getText().toString()+"/"+password.getText().toString();
-                System.out.println("This is the user detail from Main Activity "+userDetails);
                 myUsercommandhandler.handleUserCommand("4"+"/"+"viewuser"+"/"+userDetails);
                 // return value that you will use to create a new user class/object
                 // Pass that class through Intent.putExtra into the Login Page so That we can view
@@ -58,15 +57,14 @@ public class MainActivity  extends AppCompatActivity implements frameworkclientI
                     Intent intent = new Intent(MainActivity.this,LoginPage.class);
                     System.out.println(output);
                     intent.putExtra("output",output);
-                    //myUsercommandhandler.handleUserCommand("3");
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainActivity.this, "Error getting user. Please try again", Toast.LENGTH_SHORT).show();
                 }
-                System.out.println("This is the output we were looking for: "+output);
 
+                myUsercommandhandler.handleUserCommand("3");
             }
-        });
+        }); // turn on server-client comm,process, turn off server-client
 
 
 

@@ -32,8 +32,9 @@ public class LoginPage extends AppCompatActivity implements frameworkclientInter
         transfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this,Transfer.class);
-                startActivity(intent);
+                myUsercommandhandler.handleUserCommand("4"+"/"+"transfer"+"/"+"Mayokun"+"/"+"Akintunde");
+               // Intent intent = new Intent(LoginPage.this,Transfer.class);
+                //startActivity(intent);
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
