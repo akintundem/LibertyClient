@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginPage extends AppCompatActivity implements frameworkclientInterface{
     usercommandhandler myUsercommandhandler;
+    String output = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,9 @@ public class LoginPage extends AppCompatActivity implements frameworkclientInter
     }
 
     @Override
-    public void update(String theMessage) {
-
+    public void update(String theString) {
+        Message msg = Message.obtain();
+        msg.obj = theString;
+        output=msg.obj.toString();
     }
 }

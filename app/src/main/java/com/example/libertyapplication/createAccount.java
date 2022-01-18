@@ -11,20 +11,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.parceler.Parcels;
 @SuppressLint("HandlerLeak")
 public class createAccount extends AppCompatActivity implements frameworkclientInterface{
     usercommandhandler myUsercommandhandler;
-    TextView myMessageWindow;
     String userData;
 
     @Override
     public void update(String theMessage) {
         Message msg = Message.obtain();
         msg.obj = theMessage;
-        handler.sendMessage(msg);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,16 +68,13 @@ public class createAccount extends AppCompatActivity implements frameworkclientI
                 Intent intent = new Intent(createAccount.this,MainActivity.class);
                 startActivity(intent);
 
+
+                // recieve a response from output and if "user created" print this toast else print another error toast
+                Toast.makeText(createAccount.this, "User has been created", Toast.LENGTH_SHORT).show();
+
                 myUsercommandhandler.handleUserCommand("3");
             }
         });
 
     }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            myMessageWindow.append("\n" + msg.obj.toString());
-        }
-    };
 }

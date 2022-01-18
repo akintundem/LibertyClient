@@ -16,7 +16,7 @@
         tools:layout_editor_absoluteY="6dp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName11"
+        android:id="@+id/saveCash"
         android:layout_width="114dp"
         android:layout_height="57dp"
         android:layout_marginBottom="24dp"
@@ -71,7 +71,7 @@
         android:text="Savings:"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName11"
+        app:layout_constraintBottom_toTopOf="@+id/saveCash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
